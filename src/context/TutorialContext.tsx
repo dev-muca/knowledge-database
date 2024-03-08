@@ -45,14 +45,14 @@ export function TutorialProvider({ children }: ProviderProps) {
   const allTitles: Tutorial[] =
     search && titles
       ? titles.filter((title: Tutorial) => title.title.toLowerCase().includes(search.toLowerCase()))
-      : titles.length > 0
-      ? titles
-      : [];
+      : titles;
+
   async function loadAllTitles() {
     try {
-      const response = await fetch(API_BASE_URL + "/tutorial/title");
-      const titles = await response.json();
-      setTitles(titles);
+      const storage = localStorage.getItem("tutorial");
+      const tutorial = JSON.parse(storage as string);
+
+      setTitles(tutorial);
     } catch (err: any) {
       console.log("Error on fetch tutorials title:", err.message);
     }
@@ -62,32 +62,26 @@ export function TutorialProvider({ children }: ProviderProps) {
     loadAllTitles();
   }, []);
 
-  useEffect(() => {
-    async function getTutorialById() {
-      try {
-        const response = await fetch(API_BASE_URL + `/tutorial/${id}`);
-        const tutorial = await response.json();
-        setTutorial(tutorial);
-      } catch (err: any) {
-        console.log("Error on fetch tutorials title:", err.message);
-      }
-    }
-
-    getTutorialById();
-  }, [id]);
-
   async function saveTutorial(): Promise<void> {
     setLoading(true);
     try {
       if (tutorial.id === 0) throw new Error("ERROR: don't create/update how to use tutorial");
-      const response = await fetch(API_BASE_URL + "/tutorial", {
-        method: tutorial.id ? "PATCH" : "POST",
-        body: JSON.stringify(tutorial),
-      });
-      let data = await response.json();
+
+      if (tutorial.id) {
+        // patch
+      } else {
+        // post
+        const storage = localStorage.getItem("tutorial");
+        const data = storage ? JSON.parse(storage) : [];
+
+        data.push(tutorial);
+
+        localStorage.removeItem("tutorial");
+        localStorage.setItem("tutorial", JSON.stringify(data));
+      }
 
       setLoading(false);
-      setMessage(data.message);
+      setMessage("Tutorial Salvo! ✅");
 
       setTimeout(async () => {
         setSearch("");

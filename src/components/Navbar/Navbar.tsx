@@ -20,7 +20,6 @@ const Navbar = () => {
     <nav className="h-14 px-2 mx-auto flex flex-row justify-end text-white items-center text-lg gap-8 relative">
       <button
         onClick={() => {
-          setId(0);
           setTutorial(HOW_TO_USE);
         }}
         className="hover:underline text-sm"

@@ -47,8 +47,7 @@ const Results = () => {
               <li
                 key={title.title}
                 onClick={() => {
-                  setId(title.id!);
-                  setEditMode(false);
+                  setTutorial(title);
                 }}
                 className={twMerge(
                   "px-4 py-2 relative after:block after:absolute after:content-[''] after:bottom-0 after:left-1/2 after:-translate-x-1/2 after:w-[90%] after:border-b after:border-b-slate-500 hover:text-white cursor-pointer text-slate-300",
