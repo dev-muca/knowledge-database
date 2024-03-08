@@ -1,0 +1,19 @@
+import Tutorial from "@/interfaces/Tutorial";
+import pool from "@/services/database/pool";
+import { readFileSync } from "fs";
+import { RowDataPacket } from "mysql2";
+import type { NextApiRequest, NextApiResponse } from "next";
+
+export default async function handler(req: NextApiRequest, res: NextApiResponse<RowDataPacket | { message: string }>) {
+  const { id } = req.query;
+  try {
+    const conn = await pool.getConnection();
+    const sql = readFileSync("./sql/get-tutorial.sql").toString();
+    const [result] = await conn.query<RowDataPacket[]>(sql, [id]);
+    conn.release();
+
+    res.status(200).send(result[0]);
+  } catch (err: any) {
+    res.status(500).send({ message: err.message });
+  }
+}
