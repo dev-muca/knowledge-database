@@ -52,7 +52,7 @@ Após execução do modo build/developer, basta acessar <a href="http://localhos
 
 ## 🚀 DEPLOY
 
-<p>Se preferir ou não quiser ter todo o trabalho de configurar o projeto, você pode acessar uma versão minificada do projeto através <a style="color: lightblue; font-weight: bold" target="_blank" href="https://knowledge-dtb.vercel.app">deste link clicando aqui!</a></p>
+<p>Se preferir ou não quiser ter todo o trabalho de configurar o projeto, você pode acessar uma versão minificada do projeto através <a style="color: lightblue; font-weight: bold" href="https://knowledge-dtb.vercel.app" target="_blank" >deste link clicando aqui!</a></p>
 
 <br />
 Obrigado 😄😁
