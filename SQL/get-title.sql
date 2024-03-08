@@ -1,3 +1,3 @@
 SELECT id,
-    titulo `title`
-FROM tbl_tutorial;
+    title
+FROM tutorial;

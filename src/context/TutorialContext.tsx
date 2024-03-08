@@ -45,8 +45,9 @@ export function TutorialProvider({ children }: ProviderProps) {
   const allTitles: Tutorial[] =
     search && titles
       ? titles.filter((title: Tutorial) => title.title.toLowerCase().includes(search.toLowerCase()))
-      : titles;
-  //
+      : titles.length > 0
+      ? titles
+      : [];
   async function loadAllTitles() {
     try {
       const response = await fetch(API_BASE_URL + "/tutorial/title");

@@ -100,37 +100,39 @@ const Results = () => {
             </div>
           ) : (
             <>
-              {tutorial.id != 0 && (
-                <div className="flex flex-col justify-center items-center gap-2 p-2 lg:flex-row lg:pr-4">
-                  <button
-                    onClick={newTutorial}
-                    className="min-w-20 min-h-10 bg-slate-700  text-white px-4 py-2 rounded-md hover:bg-cyan-700"
-                  >
-                    Novo
-                  </button>
-                  <button
-                    onClick={editTutorial}
-                    className="min-w-20 min-h-10 bg-slate-700  text-white px-4 py-2 rounded-md hover:bg-cyan-700"
-                  >
-                    Editar
-                  </button>
-                  <button
-                    onClick={() => {
-                      setRemove(!remove);
-                      setTimeout(() => setRemove(false), 5000);
-                    }}
-                    className="min-w-20 min-h-10 bg-slate-700  text-white px-4 py-2 rounded-md hover:bg-rose-700"
-                  >
-                    {remove ? (
-                      <strong className="text-nowrap" onClick={deleteTutorial}>
-                        CONFIRMAR EXCLUSÃO!?
-                      </strong>
-                    ) : (
-                      <span>Excluir</span>
-                    )}
-                  </button>
-                </div>
-              )}{" "}
+              <div className="flex flex-col justify-center items-center gap-2 p-2 lg:flex-row lg:pr-4">
+                <button
+                  onClick={newTutorial}
+                  className="min-w-20 min-h-10 bg-slate-700  text-white px-4 py-2 rounded-md hover:bg-cyan-700"
+                >
+                  Novo
+                </button>
+                {id > 0 && (
+                  <>
+                    <button
+                      onClick={editTutorial}
+                      className="min-w-20 min-h-10 bg-slate-700  text-white px-4 py-2 rounded-md hover:bg-cyan-700"
+                    >
+                      Editar
+                    </button>
+                    <button
+                      onClick={() => {
+                        setRemove(!remove);
+                        setTimeout(() => setRemove(false), 5000);
+                      }}
+                      className="min-w-20 min-h-10 bg-slate-700  text-white px-4 py-2 rounded-md hover:bg-rose-700"
+                    >
+                      {remove ? (
+                        <strong className="text-nowrap" onClick={deleteTutorial}>
+                          CONFIRMAR EXCLUSÃO!?
+                        </strong>
+                      ) : (
+                        <span>Excluir</span>
+                      )}
+                    </button>
+                  </>
+                )}
+              </div>
             </>
           )}
         </header>

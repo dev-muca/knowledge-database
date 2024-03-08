@@ -10,10 +10,16 @@ export default function Home() {
   }, []);
 
   return (
-    <main className="container mx-auto mb-12">
-      <Navbar />
-      <Search />
-      <Results />
-    </main>
+    <>
+      <Head>
+        <title>Base De Conhecimento</title>
+        <link rel="shortcut icon" href="/favicon.png" type="image/x-icon" />
+      </Head>
+      <main className="container mx-auto mb-12">
+        <Navbar />
+        <Search />
+        <Results />
+      </main>
+    </>
   );
 }

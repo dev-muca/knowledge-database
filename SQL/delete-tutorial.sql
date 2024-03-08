@@ -1,2 +1,2 @@
-DELETE FROM tbl_tutorial
+DELETE FROM tutorial
 WHERE id = ?

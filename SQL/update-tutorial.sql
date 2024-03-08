@@ -1,4 +1,4 @@
-UPDATE tbl_tutorial
-SET titulo = ?,
-    texto = ?
+UPDATE tutorial
+SET title = ?,
+    content = ?
 WHERE id = ?

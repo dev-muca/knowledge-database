@@ -1,40 +1,42 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# 📖 BASE DE CONHECIMENTO
 
-## Getting Started
+<p style="text-align: justify">Uma ferramenta criada para compartilhar passo-a-passos de procedimentos, uteís para compartilhar conhecimento entre integrantes de uma equipe, na qual geralmente é necessário treinar novos integrantes explicando todos os procedimentos 🥸.</p>
+<br />
+<img src="https://i.imgur.com/WzgOVP4.png" alt="knowledge-db" />
 
-First, run the development server:
+## ⚙️ CONFIGURANDO O PROJETO
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+<p>Para que a aplicação venha de fato a funcionar será necessário configurar 2 items essenciais no servidor em que elá ficará hospedada, são eles:</p>
+<ul>
+    <li>Serviço Web</li>
+    <li>Banco de Dados (MySQL)</li>
+</ul>
+<p>Após configurar esses, será necessário configurar algumas váriaveis de ambiente que a aplicação consome para realizar as consultas no banco, seguem elas:</p>
+<pre ="javascript">
+MYSQL_HOST = IP_BANCO_AQUI
+MYSQL_DB   = knowledge
+MYSQL_USER = USUARIO_AQUI
+MYSQL_PASS = SENHA_AQUI
+</pre>
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+<p>Agora, é necessário criar o banco de dados, para isso, execute os scripts SQL no arquivo knowledge.sql dentro da pasta SQL.</p>
+<pre>> SQL/knowledge.sql</pre>
 
-You can start editing the page by modifying `pages/index.tsx`. The page auto-updates as you edit the file.
+## 🔥 EXECUTANDO O PROJETO
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.ts`.
+<p>Após realizadas todas as configurações, para executar o projeto, podemos seguir os seguintes passos</p>
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
+<li>Developer:</li>
+<p>Com o terminal aberto no mesmo diretorio do projeto, execute:</p>
+<pre>
+C:\knowledge-database> npm run dev
+</pre>
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+<li>Build:</li>
+<p>Com o terminal aberto no mesmo diretorio do projeto, execute:</p>
+<pre>
+C:\knowledge-database> npm run build
+C:\knowledge-database> npm run start
+</pre>
 
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+Após execução do modo build/developer, basta acessar <a href="http://localhost:3000" style="color: lightblue; font-weight: bold">http://localhost:3000</a> e o projeto estará no ar.
