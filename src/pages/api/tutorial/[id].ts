@@ -11,8 +11,8 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse<
     const sql = `SELECT T.id,
                       T.title,
                       T.content,
-                      G.name AS 'group'
-                  FROM tutorial_group TG
+                      G.name grupo
+                  FROM tutorial_grupo TG
                       RIGHT JOIN tutorial T ON T.id = TG.idTutorial
                       LEFT JOIN grupo G ON G.id = TG.idGroup
                   WHERE T.id = ?

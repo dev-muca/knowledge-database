@@ -14,17 +14,17 @@ export default async function handler(
     const sql = category
       ? `SELECT T.id,
               T.title,
-              G.group
-          FROM tutorial_group TG
+              G.name grupo
+          FROM tutorial_grupo TG
               RIGHT JOIN tutorial T ON T.id = TG.idTutorial
-              LEFT JOIN group G ON G.id = TG.idGroup
+              LEFT JOIN grupo G ON G.id = TG.idGroup
           WHERE G.nome LIKE ?`
       : `SELECT T.id,
             T.title,
-            G.group
-          FROM tutorial_group TG
+            G.name grupo
+          FROM tutorial_grupo TG
             RIGHT JOIN tutorial T ON T.id = TG.idTutorial
-            LEFT JOIN group G ON G.id = TG.idGroup;`;
+            LEFT JOIN grupo G ON G.id = TG.idGroup`;
     const [result] = await conn.query<RowDataPacket[]>(sql, [category && category]);
     conn.release();
 

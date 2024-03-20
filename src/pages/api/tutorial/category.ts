@@ -10,7 +10,7 @@ export default async function handler(
 ) {
   try {
     const conn = await pool.getConnection();
-    const sql = `SELECT id, name FROM group`;
+    const sql = `SELECT id, name FROM grupo`;
     const [result] = await conn.query<RowDataPacket[]>(sql);
     conn.release();
 
