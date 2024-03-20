@@ -12,9 +12,9 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse<
                       T.title,
                       T.content,
                       G.name AS 'group'
-                  FROM tutorial_group GT
-                      RIGHT JOIN tutorial T ON T.id = GT.idTutorial
-                      LEFT JOIN grupo G ON G.id = GT.idGroup
+                  FROM tutorial_group TG
+                      RIGHT JOIN tutorial T ON T.id = TG.idTutorial
+                      LEFT JOIN grupo G ON G.id = TG.idGroup
                   WHERE T.id = ?
                   ORDER BY T.title`;
     const [result] = await conn.query<RowDataPacket[]>(sql, [id]);
