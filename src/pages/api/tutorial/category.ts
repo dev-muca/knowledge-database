@@ -10,7 +10,7 @@ export default async function handler(
 ) {
   try {
     const conn = await pool.getConnection();
-    const sql = readFileSync("./sql/get-category.sql").toString();
+    const sql = `SELECT id, name FROM group`;
     const [result] = await conn.query<RowDataPacket[]>(sql);
     conn.release();
 

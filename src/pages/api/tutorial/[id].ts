@@ -8,7 +8,15 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse<
   const { id } = req.query;
   try {
     const conn = await pool.getConnection();
-    const sql = readFileSync("./sql/get-tutorial.sql").toString();
+    const sql = `SELECT T.id,
+                      T.title,
+                      T.content,
+                      G.name AS 'group'
+                  FROM tutorial_group GT
+                      RIGHT JOIN tutorial T ON T.id = GT.idTutorial
+                      LEFT JOIN grupo G ON G.id = GT.idGroup
+                  WHERE T.id = ?
+                  ORDER BY T.title`;
     const [result] = await conn.query<RowDataPacket[]>(sql, [id]);
     conn.release();
 

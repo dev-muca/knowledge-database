@@ -17,7 +17,7 @@ export default async function handler(
     if (req.method === "POST") {
       try {
         const conn = await pool.getConnection();
-        const sql = readFileSync("./sql/create-tutorial.sql").toString();
+        const sql = `INSERT INTO tutorial (title, content) VALUES (?, ?)`;
         const [result] = await conn.query<ResultSetHeader>(sql, [title, content]);
         conn.release();
 
@@ -30,7 +30,7 @@ export default async function handler(
     if (req.method === "PATCH") {
       try {
         const conn = await pool.getConnection();
-        const sql = readFileSync("./sql/update-tutorial.sql").toString();
+        const sql = `UPDATE tutorial SET title = ?, content = ? WHERE id = ?`;
         const [result] = await conn.query<ResultSetHeader>(sql, [title, content, id]);
         conn.release();
 
@@ -44,7 +44,7 @@ export default async function handler(
       try {
         const { id } = req.query;
         const conn = await pool.getConnection();
-        const sql = readFileSync("./sql/delete-tutorial.sql").toString();
+        const sql = `DELETE FROM tutorial WHERE id = ?`;
         const [result] = await conn.query<ResultSetHeader>(sql, [id]);
         conn.release();
 

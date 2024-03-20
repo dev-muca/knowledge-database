@@ -12,14 +12,19 @@ export default async function handler(
     const { category } = req.query;
     const conn = await pool.getConnection();
     const sql = category
-      ? readFileSync("@/sql/get-title-categories.sql").toString()
-      : readFileSync("@/sql/get-title.sql").toString();
-    // : `SELECT T.id,
-    //         T.titulo AS 'title',
-    //         G.nome AS 'group'
-    //    FROM tbl_grupo_tutorial GT
-    //         RIGHT JOIN tbl_tutorial T ON T.id = GT.id_tutorial
-    //         LEFT JOIN tbl_grupo G ON G.id = GT.id_grupo;`;
+      ? `SELECT T.id,
+              T.title,
+              G.group
+          FROM tutorial_group TG
+              RIGHT JOIN tutorial T ON T.id = GT.idTutorial
+              LEFT JOIN group G ON G.id = GT.idGroup
+          WHERE G.nome LIKE ?`
+      : `SELECT T.id,
+            T.title,
+            G.group
+          FROM tutorial_group TG
+            RIGHT JOIN tutorial T ON T.id = GT.idTutorial
+            LEFT JOIN group G ON G.id = GT.idGroup;`;
     const [result] = await conn.query<RowDataPacket[]>(sql, [category && category]);
     conn.release();
 
