@@ -14,8 +14,8 @@ export default async function handler(
     const sql = category
       ? readFileSync("./sql/get-title-categories.sql").toString()
       : `SELECT T.id,
-              T.titulo AS title,
-              G.nome AS group
+              T.titulo AS 'title',
+              G.nome AS 'group'
          FROM tbl_grupo_tutorial GT
               RIGHT JOIN tbl_tutorial T ON T.id = GT.id_tutorial
               LEFT JOIN tbl_grupo G ON G.id = GT.id_grupo;`;
