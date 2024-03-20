@@ -13,7 +13,13 @@ export default async function handler(
     const conn = await pool.getConnection();
     const sql = category
       ? readFileSync("./sql/get-title-categories.sql").toString()
-      : readFileSync("./sql/get-title.sql").toString();
+      : `SELECT T.id,
+              T.titulo AS title,
+              G.nome AS group
+         FROM tbl_grupo_tutorial GT
+              RIGHT JOIN tbl_tutorial T ON T.id = GT.id_tutorial
+              LEFT JOIN tbl_grupo G ON G.id = GT.id_grupo;`;
+    // : readFileSync("./sql/get-title.sql").toString();
     const [result] = await conn.query<RowDataPacket[]>(sql, [category && category]);
     conn.release();
 
