@@ -48,7 +48,7 @@ C:\knowledge-database> npm run build
 C:\knowledge-database> npm run start
 </pre>
 
-Após execução do modo build/developer, basta acessar <a href="http://localhost:3000" style="color: lightblue; font-weight: bold">http://localhost:3000</a> e o projeto estará no ar.
+Após execução do modo build/developer, basta acessar <a target="_blank" href="http://localhost:3000" style="color: lightblue; font-weight: bold">http://localhost:3000</a> e o projeto estará no ar.
 
 ## 🚀 DEPLOY
 
