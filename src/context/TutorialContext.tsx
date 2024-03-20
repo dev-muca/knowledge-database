@@ -55,7 +55,7 @@ export function TutorialProvider({ children }: ProviderProps) {
 
   async function getCategories() {
     try {
-      const response = await fetch(API_URL + "/tutorial/category", { mode: "no-cors" });
+      const response = await fetch(API_URL + "/tutorial/category");
       const categories = await response.json();
 
       if (categories.message) throw new Error(categories.message);
@@ -68,7 +68,7 @@ export function TutorialProvider({ children }: ProviderProps) {
 
   async function getTitles() {
     try {
-      const response = await fetch(API_URL + `/tutorial/title`, { mode: "no-cors" });
+      const response = await fetch(API_URL + `/tutorial/title`);
       const titles = await response.json();
 
       if (titles.message) throw new Error(titles.message);
@@ -92,7 +92,7 @@ export function TutorialProvider({ children }: ProviderProps) {
   useEffect(() => {
     async function getTutorialById() {
       try {
-        const response = await fetch(API_URL + `/tutorial/${id}`, { mode: "no-cors" });
+        const response = await fetch(API_URL + `/tutorial/${id}`);
         const tutorial = await response.json();
         setTutorial(tutorial);
       } catch (err: any) {
@@ -110,7 +110,6 @@ export function TutorialProvider({ children }: ProviderProps) {
       if (tutorial.id === 0) throw new Error("ERROR: don't create/update how to use tutorial");
       const response = await fetch(API_URL + "/tutorial", {
         method: tutorial.id ? "PATCH" : "POST",
-        mode: "no-cors",
         body: JSON.stringify(tutorial),
       });
       let data = await response.json();
@@ -134,7 +133,7 @@ export function TutorialProvider({ children }: ProviderProps) {
     setLoading(true);
     try {
       if (tutorial.id === 0) throw new Error("ERROR: don't exclude how to use tutorial");
-      await fetch(API_URL + `/tutorial?id=${tutorial.id}`, { method: "DELETE", mode: "no-cors" });
+      await fetch(API_URL + `/tutorial?id=${tutorial.id}`, { method: "DELETE" });
 
       setLoading(false);
       setEditMode(false);
