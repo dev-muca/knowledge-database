@@ -75,7 +75,7 @@ export function TutorialProvider({ children }: ProviderProps) {
 
       setTitles(titles);
     } catch (err: any) {
-      console.error("Error on fetch tutorials title:", err.message);
+      console.error("Ocorreu um erro ao tentar carregar os titulos dos tutoriais, detalhes:", err.message);
     }
   }
 
@@ -96,7 +96,7 @@ export function TutorialProvider({ children }: ProviderProps) {
         const tutorial = await response.json();
         setTutorial(tutorial);
       } catch (err: any) {
-        console.log("Error on fetch tutorials title:", err.message);
+        console.log("Ocorreu um erro ao tentar carregar o tutorial, detalhes:", err.message);
       }
     }
 
