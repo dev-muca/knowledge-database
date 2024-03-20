@@ -1,6 +1,6 @@
 import { Dispatch, ReactNode, SetStateAction, createContext, useEffect, useState } from "react";
 import Tutorial from "@/interfaces/Tutorial";
-import API_BASE_URL from "@/constants/API";
+import API_URL from "@/constants/API";
 import HOW_TO_USE from "@/constants/USE";
 import Category from "@/interfaces/Category";
 
@@ -55,7 +55,7 @@ export function TutorialProvider({ children }: ProviderProps) {
 
   async function getCategories() {
     try {
-      const response = await fetch(API_BASE_URL + "/tutorial/category");
+      const response = await fetch(API_URL + "/tutorial/category");
       const categories = await response.json();
 
       if (categories.message) throw new Error(categories.message);
@@ -68,7 +68,7 @@ export function TutorialProvider({ children }: ProviderProps) {
 
   async function getTitles() {
     try {
-      const response = await fetch(API_BASE_URL + `/tutorial/title`);
+      const response = await fetch(API_URL + `/tutorial/title`);
       const titles = await response.json();
 
       if (titles.message) throw new Error(titles.message);
@@ -92,7 +92,7 @@ export function TutorialProvider({ children }: ProviderProps) {
   useEffect(() => {
     async function getTutorialById() {
       try {
-        const response = await fetch(API_BASE_URL + `/tutorial/${id}`);
+        const response = await fetch(API_URL + `/tutorial/${id}`);
         const tutorial = await response.json();
         setTutorial(tutorial);
       } catch (err: any) {
@@ -108,7 +108,7 @@ export function TutorialProvider({ children }: ProviderProps) {
     setLoading(true);
     try {
       if (tutorial.id === 0) throw new Error("ERROR: don't create/update how to use tutorial");
-      const response = await fetch(API_BASE_URL + "/tutorial", {
+      const response = await fetch(API_URL + "/tutorial", {
         method: tutorial.id ? "PATCH" : "POST",
         body: JSON.stringify(tutorial),
       });
@@ -133,7 +133,7 @@ export function TutorialProvider({ children }: ProviderProps) {
     setLoading(true);
     try {
       if (tutorial.id === 0) throw new Error("ERROR: don't exclude how to use tutorial");
-      await fetch(API_BASE_URL + `/tutorial?id=${tutorial.id}`, { method: "DELETE" });
+      await fetch(API_URL + `/tutorial?id=${tutorial.id}`, { method: "DELETE" });
 
       setLoading(false);
       setEditMode(false);

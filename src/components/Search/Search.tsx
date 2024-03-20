@@ -2,7 +2,7 @@ import { ChangeEvent, useContext } from "react";
 import { IoSearch } from "react-icons/io5";
 
 import { TutorialContext } from "@/context/TutorialContext";
-import API_BASE_URL from "@/constants/API";
+import API_URL from "@/constants/API";
 import Category from "@/interfaces/Category";
 
 const Search = () => {
