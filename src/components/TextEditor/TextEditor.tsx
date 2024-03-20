@@ -43,13 +43,13 @@ const TextEditor = () => {
   };
 
   return (
-    <div className="px-4 h-screen">
+    <div className="px-4 h-full">
       <QuillEditor
         value={tutorial.content as string}
         onChange={handleEditorChange}
         modules={quillModules}
         formats={quillFormats}
-        className="w-full h-[70%] mt-10 bg-white"
+        className="h-[80%] mt-10 bg-white"
       />
     </div>
   );

@@ -5,6 +5,7 @@ import { twMerge } from "tailwind-merge";
 import TextEditor from "../TextEditor";
 import Tutorial from "@/interfaces/Tutorial";
 import { BiLoaderAlt } from "react-icons/bi";
+import HOW_TO_USE from "@/constants/USE";
 
 const Results = () => {
   const {
@@ -86,13 +87,15 @@ const Results = () => {
                 {loading ? (
                   <BiLoaderAlt className="animate-spin" />
                 ) : (
-                  <span className="text-nowrap">
-                    {error ? <>{() => alert(`ERROR AO SALVAR TUTORIAL: ${error.toString()}`)}</> : message}
-                  </span>
+                  <span className="text-nowrap">{error ? error.toString() : message}</span>
                 )}
               </button>
               <button
-                onClick={() => setEditMode(false)}
+                onClick={() => {
+                  setId(0);
+                  setTutorial(HOW_TO_USE);
+                  setEditMode(false);
+                }}
                 className="min-w-20 min-h-10 bg-slate-700  text-white px-4 py-2 rounded-md hover:bg-rose-700"
               >
                 Cancelar

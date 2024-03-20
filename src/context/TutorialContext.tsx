@@ -2,6 +2,7 @@ import { Dispatch, ReactNode, SetStateAction, createContext, useEffect, useState
 import Tutorial from "@/interfaces/Tutorial";
 import API_BASE_URL from "@/constants/API";
 import HOW_TO_USE from "@/constants/USE";
+import Category from "@/interfaces/Category";
 
 interface ProviderProps {
   children: ReactNode;
@@ -14,6 +15,8 @@ interface ContextProps {
   titles: Tutorial[];
   tutorial: Tutorial;
   allTitles: Tutorial[];
+  categories: Category[];
+  category: Category;
   loading: boolean;
   message: string;
   error: any;
@@ -22,6 +25,7 @@ interface ContextProps {
   setTitles: Dispatch<SetStateAction<Tutorial[]>>;
   setEditMode: Dispatch<SetStateAction<boolean>>;
   setTutorial: Dispatch<SetStateAction<Tutorial>>;
+  setCategory: Dispatch<SetStateAction<Category>>;
   saveTutorial: () => Promise<void>;
   deleteTutorial: () => Promise<void>;
 }
@@ -33,7 +37,7 @@ export function TutorialProvider({ children }: ProviderProps) {
   const [id, setId] = useState<number>(null!);
   const [search, setSearch] = useState<string>("");
   //
-  const [titles, setTitles] = useState<Tutorial[]>(null!);
+  const [titles, setTitles] = useState<Tutorial[]>([]);
   const [tutorial, setTutorial] = useState<Tutorial>(HOW_TO_USE);
   //
   const [editMode, setEditMode] = useState<boolean>(false);
@@ -41,25 +45,48 @@ export function TutorialProvider({ children }: ProviderProps) {
   //
   const [message, setMessage] = useState<string>("Salvar");
   const [error, setError] = useState<any>(null);
+  //
+  const [category, setCategory] = useState<Category>({ name: "null" });
+  const [categories, setCategories] = useState<Category[]>([]);
 
-  const allTitles: Tutorial[] =
-    search && titles
-      ? titles.filter((title: Tutorial) => title.title.toLowerCase().includes(search.toLowerCase()))
-      : titles.length > 0
-      ? titles
-      : [];
-  async function loadAllTitles() {
+  const allTitles: Tutorial[] = search
+    ? titles.filter((title: Tutorial) => title.title.toLowerCase().includes(search.toLowerCase()))
+    : titles;
+
+  async function getCategories() {
     try {
-      const response = await fetch(API_BASE_URL + "/tutorial/title");
+      const response = await fetch(API_BASE_URL + "/tutorial/category");
+      const categories = await response.json();
+
+      if (categories.message) throw new Error(categories.message);
+
+      setCategories(categories);
+    } catch (err: any) {
+      console.error("Error on fetch categories names:", err.message);
+    }
+  }
+
+  async function getTitles() {
+    try {
+      const response = await fetch(API_BASE_URL + `/tutorial/title`);
       const titles = await response.json();
+
+      if (titles.message) throw new Error(titles.message);
+
       setTitles(titles);
     } catch (err: any) {
-      console.log("Error on fetch tutorials title:", err.message);
+      console.error("Error on fetch tutorials title:", err.message);
     }
   }
 
   useEffect(() => {
-    loadAllTitles();
+    console.log(category.name);
+    async function loadAll() {
+      await getTitles();
+      await getCategories();
+    }
+
+    loadAll();
   }, []);
 
   useEffect(() => {
@@ -77,6 +104,7 @@ export function TutorialProvider({ children }: ProviderProps) {
   }, [id]);
 
   async function saveTutorial(): Promise<void> {
+    setError(null);
     setLoading(true);
     try {
       if (tutorial.id === 0) throw new Error("ERROR: don't create/update how to use tutorial");
@@ -89,14 +117,15 @@ export function TutorialProvider({ children }: ProviderProps) {
       setLoading(false);
       setMessage(data.message);
 
-      setTimeout(async () => {
-        setSearch("");
-        setEditMode(false);
-        setMessage("Salvar");
-        await loadAllTitles();
-      }, 2000);
+      // setTimeout(() => {
+      setSearch("");
+      setEditMode(false);
+      setMessage("Salvar");
+      getTitles();
+      // }, 2000);
     } catch (error: any) {
       setError(error.message);
+      setLoading(false);
     }
   }
 
@@ -110,10 +139,11 @@ export function TutorialProvider({ children }: ProviderProps) {
       setEditMode(false);
 
       setSearch("");
-      await loadAllTitles();
       setTutorial(HOW_TO_USE);
+      await getTitles();
     } catch (error: any) {
-      console.log("CTX ERROR:", error.message);
+      console.log(error.message);
+      setLoading(true);
     }
   }
 
@@ -127,6 +157,8 @@ export function TutorialProvider({ children }: ProviderProps) {
         tutorial,
         editMode,
         allTitles,
+        category,
+        categories,
         message,
         error,
         setId,
@@ -134,6 +166,7 @@ export function TutorialProvider({ children }: ProviderProps) {
         setSearch,
         setEditMode,
         setTutorial,
+        setCategory,
         saveTutorial,
         deleteTutorial,
       }}

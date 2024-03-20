@@ -1,9 +1,9 @@
 SELECT T.id,
-    T.title,
-    T.content,
-    G.name
-FROM tutorial_group TG
-    RIGHT JOIN `tutorial` T ON T.id = TG.idTutorial
-    LEFT JOIN `group` G ON G.id = TG.idGroup
+    T.titulo `title`,
+    T.texto `content`,
+    G.nome `group`
+FROM tbl_grupo_tutorial GT
+    RIGHT JOIN tbl_tutorial T ON T.id = GT.id_tutorial
+    LEFT JOIN tbl_grupo G ON G.id = GT.id_grupo
 WHERE T.id = ?
-ORDER BY T.title;
+ORDER BY T.titulo;

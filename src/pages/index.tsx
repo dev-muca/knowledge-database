@@ -6,7 +6,7 @@ import { useEffect } from "react";
 
 export default function Home() {
   useEffect(() => {
-    document.title = "Base De Conhecimento";
+    document.title = "Base de Conhecimento";
   }, []);
 
   return (

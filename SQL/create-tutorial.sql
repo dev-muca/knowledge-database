@@ -1,2 +1,2 @@
-INSERT INTO tutorial (title, content)
+INSERT INTO tbl_tutorial (titulo, texto)
 VALUES (?, ?);
