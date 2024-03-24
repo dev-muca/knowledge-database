@@ -1,6 +1,6 @@
 # 📖 BASE DE CONHECIMENTO
 
-<p style="text-align: justify">Uma ferramenta criada para compartilhar passo-a-passos de procedimentos, uteís para compartilhar conhecimento entre integrantes de uma equipe, na qual geralmente é necessário treinar novos integrantes explicando todos os procedimentos 🥸.</p>
+<p style="text-align: justify">Uma ferramenta criada para compartilhar passo-a-passos de procedimentos, úteis para compartilhar conhecimento entre integrantes de uma equipe, na qual geralmente é necessário treinar novos integrantes explicando todos os procedimentos 🥸.</p>
 <br />
 <img src="https://i.imgur.com/WzgOVP4.png" alt="knowledge-db" />
 
