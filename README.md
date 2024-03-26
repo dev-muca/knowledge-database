@@ -2,7 +2,9 @@
 
 <p style="text-align: justify">Uma ferramenta criada para compartilhar passo-a-passos de procedimentos, úteis para compartilhar conhecimento entre integrantes de uma equipe, na qual geralmente é necessário treinar novos integrantes explicando todos os procedimentos 🥸.</p>
 <br />
-<img src="https://i.imgur.com/WzgOVP4.png" alt="knowledge-db" />
+<a target="_blank" href="https://knowledge-dtb.vercel.app">
+    <img src="https://i.imgur.com/WzgOVP4.png" alt="knowledge-db" />
+</a>
 
 ## 🤖 CLONANDO O PROJETO
 
